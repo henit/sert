@@ -15,6 +15,16 @@ describe('Sert', () => {
             expect(() => Sert.string([])).to.throw(Error);
         });
 
+        it('should throw error object with given props', () => {
+            try {
+                Sert.string(42, { message: 'Foo bar', status: 418 });
+            } catch (e) {
+                expect(e).to.be.instanceOf(Error);
+                expect(e.message).to.equal('Foo bar');
+                expect(e.status).to.equal(418);
+            }
+        });
+
         it('should pass valid subjects', () => {
             Sert.string('');
             Sert.string('0');
@@ -32,6 +42,16 @@ describe('Sert', () => {
             expect(() => Sert.number([])).to.throw(Error);
         });
 
+        it('should throw error object with given props', () => {
+            try {
+                Sert.number('abc', { message: 'Foo bar', status: 418 });
+            } catch (e) {
+                expect(e).to.be.instanceOf(Error);
+                expect(e.message).to.equal('Foo bar');
+                expect(e.status).to.equal(418);
+            }
+        });
+
         it('should pass valid subjects', () => {
             Sert.number(42);
         });
@@ -44,6 +64,16 @@ describe('Sert', () => {
             expect(() => Sert.object(42)).to.throw(Error);
             expect(() => Sert.object('abc')).to.throw(Error);
             expect(() => Sert.object([])).to.throw(Error);
+        });
+
+        it('should throw error object with given props', () => {
+            try {
+                Sert.object(42, { message: 'Foo bar', status: 418 });
+            } catch (e) {
+                expect(e).to.be.instanceOf(Error);
+                expect(e.message).to.equal('Foo bar');
+                expect(e.status).to.equal(418);
+            }
         });
 
         it('should pass valid subjects', () => {
@@ -61,6 +91,16 @@ describe('Sert', () => {
             expect(() => Sert.func({})).to.throw(Error);
         });
 
+        it('should throw error object with given props', () => {
+            try {
+                Sert.func(42, { message: 'Foo bar', status: 418 });
+            } catch (e) {
+                expect(e).to.be.instanceOf(Error);
+                expect(e.message).to.equal('Foo bar');
+                expect(e.status).to.equal(418);
+            }
+        });
+
         it('should pass valid subjects', () => {
             Sert.func(function() {});
             Sert.func(() => null);
@@ -76,6 +116,16 @@ describe('Sert', () => {
             expect(() => Sert.array('abc')).to.throw(Error);
         });
 
+        it('should throw error object with given props', () => {
+            try {
+                Sert.array(42, { message: 'Foo bar', status: 418 });
+            } catch (e) {
+                expect(e).to.be.instanceOf(Error);
+                expect(e.message).to.equal('Foo bar');
+                expect(e.status).to.equal(418);
+            }
+        });
+
         it('should pass valid subjects', () => {
             Sert.array([]);
         });
@@ -89,6 +139,16 @@ describe('Sert', () => {
             expect(() => Sert.bool('abc')).to.throw(Error);
             expect(() => Sert.bool({})).to.throw(Error);
             expect(() => Sert.bool([])).to.throw(Error);
+        });
+
+        it('should throw error object with given props', () => {
+            try {
+                Sert.bool(42, { message: 'Foo bar', status: 418 });
+            } catch (e) {
+                expect(e).to.be.instanceOf(Error);
+                expect(e.message).to.equal('Foo bar');
+                expect(e.status).to.equal(418);
+            }
         });
 
         it('should pass valid subjects', () => {
@@ -109,6 +169,16 @@ describe('Sert', () => {
             expect(() => Sert.equal([], [])).to.throw(Error);
             expect(() => Sert.equal(null, 'null')).to.throw(Error);
             expect(() => Sert.equal(undefined, null)).to.throw(Error);
+        });
+
+        it('should throw error object with given props', () => {
+            try {
+                Sert.equal(42, 43, { message: 'Foo bar', status: 418 });
+            } catch (e) {
+                expect(e).to.be.instanceOf(Error);
+                expect(e.message).to.equal('Foo bar');
+                expect(e.status).to.equal(418);
+            }
         });
 
         it('should pass valid subjects', () => {

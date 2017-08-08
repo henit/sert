@@ -1,16 +1,30 @@
 let Sert = {};
 
+function throwError(error) {
+    if ((typeof error) === 'string') {
+        throw new Error(error);
+    }
+
+    let err = new Error(error.message || 'Invalid value');
+    if (error.status) {
+        err.status = error.status;
+    }
+    throw err;
+}
+
 // Primitive types
 
 /**
  * Assert subject to be a string
  * @param {string} subject Assertion subject
- * @param {string} [message] Error message for failed assertions
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
  * @return {string} Subject
  */
-Sert.string = (subject, message = 'Value is not a string.') => {
+Sert.string = (subject, error = 'Value is not a string.') => {
     if ((typeof subject) !== 'string') {
-        throw new Error(message);
+        throwError(error);
     }
     return subject;
 };
@@ -18,12 +32,14 @@ Sert.string = (subject, message = 'Value is not a string.') => {
 /**
  * Assert subject to be a number
  * @param {number} subject Assertion subject
- * @param {string} [message] Error message for failed assertions
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
  * @return {number} Subject
  */
-Sert.number = (subject, message = 'Value is not a number.') => {
+Sert.number = (subject, error = 'Value is not a number.') => {
     if ((typeof subject) !== 'number') {
-        throw new Error(message);
+        throwError(error);
     }
     return subject;
 };
@@ -31,12 +47,14 @@ Sert.number = (subject, message = 'Value is not a number.') => {
 /**
  * Assert subject to be an object
  * @param {object} subject Assertion subject
- * @param {string} [message] Error message for failed assertions
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
  * @return {object} Subject
  */
-Sert.object = (subject, message = 'Value is not an object.') => {
+Sert.object = (subject, error = 'Value is not an object.') => {
     if ((typeof subject) !== 'object' || Array.isArray(subject) || subject === null || subject === undefined) {
-        throw new Error(message);
+        throwError(error);
     }
     return subject;
 };
@@ -44,12 +62,14 @@ Sert.object = (subject, message = 'Value is not an object.') => {
 /**
  * Assert subject to be a function
  * @param {object} subject Assertion subject
- * @param {string} [message] Error message for failed assertions
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
  * @return {function} Subject
  */
-Sert.func = (subject, message = 'Value is not a function.') => {
+Sert.func = (subject, error = 'Value is not a function.') => {
     if ((typeof subject) !== 'function') {
-        throw new Error(message);
+        throwError(error);
     }
     return subject;
 };
@@ -57,12 +77,14 @@ Sert.func = (subject, message = 'Value is not a function.') => {
 /**
  * Assert subject to be an array
  * @param {array} subject Assertion subject
- * @param {string} [message] Error message for failed assertions
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
  * @return {array} Subject
  */
-Sert.array = (subject, message = 'Value is not an array.') => {
+Sert.array = (subject, error = 'Value is not an array.') => {
     if (!Array.isArray(subject)) {
-        throw new Error(message);
+        throwError(error);
     }
     return subject;
 };
@@ -70,12 +92,14 @@ Sert.array = (subject, message = 'Value is not an array.') => {
 /**
  * Assert subject to be a boolean
  * @param {boolean} subject Assertion subject
- * @param {string} [message] Error message for failed assertions
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
  * @return {boolean} Subject
  */
-Sert.bool = (subject, message = 'Value is not a boolean.') => {
+Sert.bool = (subject, error = 'Value is not a boolean.') => {
     if (subject !== true && subject !== false) {
-        throw new Error(message);
+        throwError(error);
     }
     return subject;
 };
@@ -86,12 +110,16 @@ Sert.bool = (subject, message = 'Value is not a boolean.') => {
  * Assert subject1 to be equal (===) subject2
  * @param {mixed} subject1 Subject 1
  * @param {mixed} subject2 Subject 2
- * @param {string} [message] Error message for failed assertions
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
+ * @return {mixed} First subject
  */
-Sert.equal = (subject1, subject2, message = 'Subjects are not equal.') => {
+Sert.equal = (subject1, subject2, error = 'Subjects are not equal.') => {
     if (subject1 !== subject2) {
-        throw new Error(message);
+        throwError(error);
     }
+    return subject1;
 };
 
 export default Sert;
