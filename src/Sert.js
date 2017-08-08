@@ -1,3 +1,5 @@
+import 'core-js/fn/array/is-array';
+
 let Sert = {};
 
 function throwError(error) {
