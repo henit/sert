@@ -1,2 +1,3 @@
 # sert
-Functional assertions for business logic and tests
+
+Simple javascript assertions for business logic and unit tests
