@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-import Sert from '../Sert';
 import { expect } from 'chai';
+import Sert from '../Sert';
 
 describe('Sert', () => {
 
@@ -213,6 +213,80 @@ describe('Sert', () => {
         it('should pass values in list', () => {
             Sert.in([1, 2], 2);
             Sert.in(['a', 'b'], 'a');
+        });
+    });
+
+    describe('.notIn', () => {
+        it('should throw error for elements not in list', () => {
+            expect(() => Sert.notIn([1, 2, 3], 3)).to.throw(Error);
+            expect(() => Sert.notIn(['a', 'b'], 'b')).to.throw(Error);
+        });
+
+        it('should throw error object with given props', () => {
+            try {
+                Sert.notIn([1, 2], 2, { message: 'Foo bar', status: 418 });
+            } catch (e) {
+                expect(e).to.be.instanceOf(Error);
+                expect(e.message).to.equal('Foo bar');
+                expect(e.status).to.equal(418);
+            }
+        });
+
+        it('should pass values in list', () => {
+            Sert.notIn([1, 2], 3);
+            Sert.notIn(['1', '2'], 2);
+            Sert.notIn(['a', 'b'], 'c');
+        });
+    });
+
+    describe('.empty', () => {
+        it('should throw error for elements not in list', () => {
+            expect(() => Sert.empty({ foo: 'bar' })).to.throw(Error);
+            expect(() => Sert.empty([0])).to.throw(Error);
+            expect(() => Sert.empty(42)).to.throw(Error);
+        });
+
+        it('should throw error object with given props', () => {
+            try {
+                Sert.empty(42, { message: 'Foo bar', status: 418 });
+            } catch (e) {
+                expect(e).to.be.instanceOf(Error);
+                expect(e.message).to.equal('Foo bar');
+                expect(e.status).to.equal(418);
+            }
+        });
+
+        it('should pass values in list', () => {
+            Sert.empty({});
+            Sert.empty([]);
+            Sert.empty(undefined);
+            Sert.empty(null);
+        });
+    });
+
+    describe('.notEmpty', () => {
+        it('should throw error for elements not in list', () => {
+            expect(() => Sert.notEmpty({})).to.throw(Error);
+            expect(() => Sert.notEmpty([])).to.throw(Error);
+            expect(() => Sert.notEmpty(undefined)).to.throw(Error);
+            expect(() => Sert.notEmpty(null)).to.throw(Error);
+        });
+
+        it('should throw error object with given props', () => {
+            try {
+                Sert.notEmpty([], { message: 'Foo bar', status: 418 });
+            } catch (e) {
+                expect(e).to.be.instanceOf(Error);
+                expect(e.message).to.equal('Foo bar');
+                expect(e.status).to.equal(418);
+            }
+        });
+
+        it('should pass values in list', () => {
+            Sert.notEmpty({ bar: 'FOO' });
+            Sert.notEmpty(['a', 'b', 'c']);
+            Sert.notEmpty(42);
+            Sert.notEmpty('abc');
         });
     });
 

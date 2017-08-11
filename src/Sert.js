@@ -141,4 +141,59 @@ Sert.in = (list, subject, error = 'Subject is not in list.') => {
     return subject;
 };
 
+/**
+ * Assert subject to not be among the elements in list
+ * @param {array} list List
+ * @param {mixed} subject Assertion subject
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
+ * @return {mixed} Subject
+ */
+Sert.notIn = (list, subject, error = 'Subject is in list.') => {
+    if (list.includes(subject)) {
+        throwError(error);
+    }
+    return subject;
+};
+
+function isEmpty(subject) {
+    return Boolean(
+        subject === null
+        || subject === undefined
+        || (Array.isArray(subject) && subject.length === 0)
+        || ((typeof subject) === 'object' && Object.keys(subject).length === 0)
+    );
+}
+
+/**
+ * Assert subject to be empty ({}, [], null or undefined)
+ * @param {mixed} subject Assertion subject
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
+ * @return {mixed} Subject
+ */
+Sert.empty = (subject, error = 'Subject is not empty.') => {
+    if (!isEmpty(subject)) {
+        throwError(error);
+    }
+    return subject;
+};
+
+/**
+ * Assert subject to not be empty ({}. [], null, undefined)
+ * @param {mixed} subject Assertion subject
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
+ * @return {mixed} Subject
+ */
+Sert.notEmpty = (subject, error = 'Subject is empty.') => {
+    if (isEmpty(subject)) {
+        throwError(error);
+    }
+    return subject;
+};
+
 export default Sert;
