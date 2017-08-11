@@ -1,4 +1,5 @@
 import 'core-js/fn/array/is-array';
+import 'core-js/fn/array/includes';
 
 let Sert = {};
 
@@ -122,6 +123,22 @@ Sert.equal = (subject1, subject2, error = 'Subjects are not equal.') => {
         throwError(error);
     }
     return subject1;
+};
+
+/**
+ * Assert subject to be among the elements in list
+ * @param {array} list List
+ * @param {mixed} subject Assertion subject
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
+ * @return {mixed} Subject
+ */
+Sert.in = (list, subject, error = 'Subject is not in list.') => {
+    if (!list.includes(subject)) {
+        throwError(error);
+    }
+    return subject;
 };
 
 export default Sert;

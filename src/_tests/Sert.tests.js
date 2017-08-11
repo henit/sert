@@ -6,7 +6,7 @@ describe('Sert', () => {
 
     // Primitives
 
-    describe('.string()', () => {
+    describe('.string', () => {
         it('should throw error for invalid subjects', () => {
             expect(() => Sert.string(null)).to.throw(Error);
             expect(() => Sert.string(undefined)).to.throw(Error);
@@ -33,7 +33,7 @@ describe('Sert', () => {
         });
     });
 
-    describe('.number()', () => {
+    describe('.number', () => {
         it('should throw error for invalid subjects', () => {
             expect(() => Sert.number(null)).to.throw(Error);
             expect(() => Sert.number(undefined)).to.throw(Error);
@@ -57,7 +57,7 @@ describe('Sert', () => {
         });
     });
 
-    describe('.object()', () => {
+    describe('.object', () => {
         it('should throw error for invalid subjects', () => {
             expect(() => Sert.object(null)).to.throw(Error);
             expect(() => Sert.object(undefined)).to.throw(Error);
@@ -81,7 +81,7 @@ describe('Sert', () => {
         });
     });
 
-    describe('.func()', () => {
+    describe('.func', () => {
         it('should throw error for invalid subjects', () => {
             expect(() => Sert.func(null)).to.throw(Error);
             expect(() => Sert.func(undefined)).to.throw(Error);
@@ -107,7 +107,7 @@ describe('Sert', () => {
         });
     });
 
-    describe('.array()', () => {
+    describe('.array', () => {
         it('should throw error for invalid subjects', () => {
             expect(() => Sert.array(null)).to.throw(Error);
             expect(() => Sert.array(undefined)).to.throw(Error);
@@ -131,7 +131,7 @@ describe('Sert', () => {
         });
     });
 
-    describe('.bool()', () => {
+    describe('.bool', () => {
         it('should throw error for invalid subjects', () => {
             expect(() => Sert.bool(null)).to.throw(Error);
             expect(() => Sert.bool(undefined)).to.throw(Error);
@@ -159,7 +159,7 @@ describe('Sert', () => {
 
     // Comparison
 
-    describe('.equal()', () => {
+    describe('.equal', () => {
         it('should throw error for invalid subjects', () => {
             expect(() => Sert.equal(1, 2)).to.throw(Error);
             expect(() => Sert.equal('a', 'b')).to.throw(Error);
@@ -190,6 +190,29 @@ describe('Sert', () => {
             Sert.equal(null, null);
             const obj = {};
             Sert.equal(obj, obj);
+        });
+    });
+
+    describe('.in', () => {
+        it('should throw error for elements not in list', () => {
+            expect(() => Sert.in([1, 2, 3], 4)).to.throw(Error);
+            expect(() => Sert.in(['a', 'b'], 'c')).to.throw(Error);
+            expect(() => Sert.in(['1', '2'], 2)).to.throw(Error);
+        });
+
+        it('should throw error object with given props', () => {
+            try {
+                Sert.in([1, 2], 3, { message: 'Foo bar', status: 418 });
+            } catch (e) {
+                expect(e).to.be.instanceOf(Error);
+                expect(e.message).to.equal('Foo bar');
+                expect(e.status).to.equal(418);
+            }
+        });
+
+        it('should pass values in list', () => {
+            Sert.in([1, 2], 2);
+            Sert.in(['a', 'b'], 'a');
         });
     });
 
