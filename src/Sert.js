@@ -110,6 +110,78 @@ Sert.bool = (subject, error = 'Value is not a boolean.') => {
 // Comparison
 
 /**
+ * Assert subject (or subject length for arrays) to be above boundry
+ * @param {number} boundry Boundry for comparison
+ * @param {mixed} subject Subject
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
+ * @return {mixed} Subject
+ */
+Sert.above = (boundry, subject, error = 'Value is not above boundry.') => {
+    if ((Array.isArray(subject) && !(subject.length > boundry)) ||
+        (!Array.isArray(subject) && !(subject > boundry))
+    ) {
+        throwError(error);
+    }
+    return subject;
+};
+
+/**
+ * Assert subject (or subject length for arrays) to be at least boundry
+ * @param {number} boundry Boundry for comparison
+ * @param {mixed} subject Subject
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
+ * @return {mixed} Subject
+ */
+Sert.atLeast = (boundry, subject, error = 'Value is not at least boundry.') => {
+    if ((Array.isArray(subject) && !(subject.length >= boundry)) ||
+        (!Array.isArray(subject) && !(subject >= boundry))
+    ) {
+        throwError(error);
+    }
+    return subject;
+};
+
+/**
+ * Assert subject (or subject length for arrays) to be below boundry
+ * @param {number} boundry Boundry for comparison
+ * @param {mixed} subject Subject
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
+ * @return {mixed} Subject
+ */
+Sert.below = (boundry, subject, error = 'Value is not below boundry.') => {
+    if ((Array.isArray(subject) && !(subject.length < boundry)) ||
+        (!Array.isArray(subject) && !(subject < boundry))
+    ) {
+        throwError(error);
+    }
+    return subject;
+};
+
+/**
+ * Assert subject (or subject length for arrays) to be at most boundry
+ * @param {number} boundry Boundry for comparison
+ * @param {mixed} subject Subject
+ * @param {string|object} [error] Error message (string) or props (object) for failed assertions
+ * @param {string} [error.message] Error message
+ * @param {number} [error.status] Error status, for http requests
+ * @return {mixed} Subject
+ */
+Sert.atMost = (boundry, subject, error = 'Value is not at most boundry.') => {
+    if ((Array.isArray(subject) && !(subject.length <= boundry)) ||
+        (!Array.isArray(subject) && !(subject <= boundry))
+    ) {
+        throwError(error);
+    }
+    return subject;
+};
+
+/**
  * Assert subject1 to be equal (===) subject2
  * @param {mixed} subject1 Subject 1
  * @param {mixed} subject2 Subject 2

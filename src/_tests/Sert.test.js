@@ -125,6 +125,67 @@ test('.bool pass valid subjects', t => {
 
 // Comparison
 
+test('.above throw error for invalid subjects', t => {
+    t.throws(() => Sert.above(5, 3));
+    t.throws(() => Sert.above(5, 5));
+    t.throws(() => Sert.above(0, -1));
+    t.throws(() => Sert.above(3, [1, 2, 3]));
+    t.throws(() => Sert.above(4, [1, 2, 3]));
+});
+
+test('.above pass valid subjects', t => {
+    Sert.above(5, 6);
+    Sert.above(-1, 0);
+    Sert.above(1, [1, 2, 3]);
+    Sert.above(2, [1, 2, 3]);
+});
+
+
+test('.atLeast throw error for invalid subjects', t => {
+    t.throws(() => Sert.atLeast(5, 4));
+    t.throws(() => Sert.atLeast(-2, -4));
+    t.throws(() => Sert.atLeast(4, [1, 2, 3]));
+});
+
+test('.atLeast pass valid subjects', t => {
+    Sert.atLeast(5, 5);
+    Sert.atLeast(5, 7);
+    Sert.atLeast(0, 0);
+    Sert.atLeast(3, [1, 2, 3]);
+    Sert.atLeast(3, [1, 2, 3, 4]);
+});
+
+
+test('.below throw error for invalid subjects', t => {
+    t.throws(() => Sert.below(5, 5));
+    t.throws(() => Sert.below(5, 12));
+    t.throws(() => Sert.below(-7, -5));
+    t.throws(() => Sert.below(2, [1, 2, 3]));
+    t.throws(() => Sert.below(3, [1, 2, 3]));
+});
+
+test('.below pass valid subjects', t => {
+    Sert.below(5, 4);
+    Sert.below(-2, -3);
+    Sert.below(4, [1, 2, 3]);
+});
+
+
+test('.atMost throw error for invalid subjects', t => {
+    t.throws(() => Sert.atMost(5, 6));
+    t.throws(() => Sert.atMost(-2, -1));
+    t.throws(() => Sert.atMost(2, [1, 2, 3]));
+
+});
+
+test('.atMost pass valid subjects', t => {
+    Sert.atMost(5, 5);
+    Sert.atMost(5, 3);
+    Sert.atMost(-2, -2);
+    Sert.atMost(3, [1, 2, 3]);
+    Sert.atMost(4, [1, 2, 3]);
+});
+
 test('.equal throw error for invalid subjects', t => {
     t.throws(() => Sert.equal(1, 2));
     t.throws(() => Sert.equal('a', 'b'));
