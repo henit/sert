@@ -14,7 +14,8 @@
     "compile": "babel src --out-dir lib",
     "clean": "rimraf lib",
     "preversion": "npm run test",
-    "postinstall": "npm run compile"
+    "prepublish": "npm run compile",
+    "postpublish": "npm run clean"
   },
   "repository": {
     "type": "git",
